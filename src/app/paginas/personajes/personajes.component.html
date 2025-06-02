@@ -1,0 +1,15 @@
+<h1>Dragon Ball Characters</h1>
+
+<div class="contenedor">
+  <div class="card" *ngFor="let p of visibles">
+    <img [src]="p.image" [alt]="p.name" loading="lazy" width="240" height="300" />
+    <h3>{{ p.name }}</h3>
+    <p class="raza-genero">{{ p.race }} - {{ p.gender }}</p>
+    <p class="ki">Base KI: <span>{{ p.ki | number:'1.0-0' }}</span></p>
+    <a [routerLink]="['/detalle', p.id]">Ver más</a>
+  </div>
+</div>
+
+<div style="text-align: center; margin-top: 2rem;">
+  <button *ngIf="quedanMas()" (click)="cargarMas()">Cargar más</button>
+</div>
