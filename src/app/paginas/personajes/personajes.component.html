@@ -1,5 +1,9 @@
 <h1>Dragon Ball Characters</h1>
 
+<div style="text-align: center; margin-bottom: 1.5rem;">
+  <input type="text" [(ngModel)]="busqueda" (input)="onBuscar()" placeholder="Buscar por nombre..." />
+</div>
+
 <div class="contenedor">
   <div class="card" *ngFor="let p of visibles">
     <img [src]="p.image" [alt]="p.name" loading="lazy" width="240" height="300" />

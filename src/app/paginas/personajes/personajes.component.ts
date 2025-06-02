@@ -2,11 +2,12 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PersonajeService, Personaje } from '../../servicios/personaje.service';
 import { RouterModule } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-personajes',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './personajes.component.html',
   styleUrl: './personajes.component.scss'
 })
@@ -16,6 +17,8 @@ export class PersonajesComponent {
   cantidadAMostrar = 10;
   personajeService = inject(PersonajeService);
 
+  busqueda = ''; // 👈 Campo para búsqueda
+
   constructor() {
     this.personajeService.obtenerTodos().subscribe(res => {
       this.personajes = res.items;
@@ -23,8 +26,15 @@ export class PersonajesComponent {
     });
   }
 
+  get personajesFiltrados(): Personaje[] {
+    return this.personajes.filter(p =>
+      p.name.toLowerCase().includes(this.busqueda.toLowerCase())
+    );
+  }
+
   actualizarVisibles(): void {
-    this.visibles = this.personajes.slice(0, this.visibles.length + this.cantidadAMostrar);
+    const nuevos = this.personajesFiltrados.slice(0, this.visibles.length + this.cantidadAMostrar);
+    this.visibles = nuevos;
   }
 
   cargarMas(): void {
@@ -32,6 +42,10 @@ export class PersonajesComponent {
   }
 
   quedanMas(): boolean {
-    return this.visibles.length < this.personajes.length;
+    return this.visibles.length < this.personajesFiltrados.length;
+  }
+
+  onBuscar(): void {
+    this.visibles = this.personajesFiltrados.slice(0, this.cantidadAMostrar);
   }
 }

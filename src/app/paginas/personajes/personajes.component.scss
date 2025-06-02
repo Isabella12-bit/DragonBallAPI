@@ -96,3 +96,17 @@ button {
 button:hover {
   background-color: #cc3700;
 }
+input[type="text"] {
+  padding: 0.5rem 1rem;
+  width: 300px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+input[type="text"]:focus {
+  border-color: #ff4500;
+}
+
