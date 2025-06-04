@@ -2,12 +2,13 @@ body {
   margin: 0;
   background-color: #1e1e2f;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #f0f0f0;
 }
 
 h1 {
   text-align: center;
   margin: 2rem 0 1rem;
-  color: #ffcc00;
+  color: #443358; /* Lavanda suave */
   font-size: 2.5rem;
 }
 
@@ -19,10 +20,8 @@ h1 {
   padding: 2rem;
 }
 
-
-
 .card {
-  background-color: #2a2a3d;
+  background-color: #4b4453; /* Morado grisáceo */
   border-radius: 12px;
   overflow: hidden;
   width: 240px;
@@ -31,7 +30,7 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  color: #ffffff;
+  color: #f0f0f0;
   text-align: center;
 }
 
@@ -50,10 +49,11 @@ h1 {
   font-size: 1.4rem;
   margin: 0.5rem 0 0;
   font-weight: bold;
+  color: #cba6f7;
 }
 
 .card .raza-genero {
-  color: #ffcc00;
+  color: #b0b0b0;
   font-weight: 500;
   font-size: 1rem;
   margin-bottom: 0.5rem;
@@ -61,13 +61,13 @@ h1 {
 
 .card .ki {
   font-size: 0.95rem;
-  color: #aaaaaa;
+  color: #d1d1d1;
   margin-bottom: 1rem;
 }
 
 .card .ki span {
   font-weight: bold;
-  color: #ffcc00;
+  color: #cba6f7;
 }
 
 @media (max-width: 768px) {
@@ -83,30 +83,49 @@ h1 {
 }
 
 button {
-  background-color: #ff4500;
-  color: white;
+  background-color: #cba6f7;
+  color: #1e1e2f;
   padding: 0.75rem 1.5rem;
   border: none;
   border-radius: 8px;
   font-size: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  margin: 1rem;
 }
 
 button:hover {
-  background-color: #cc3700;
+  background-color: #b38ee4;
 }
+
 input[type="text"] {
   padding: 0.5rem 1rem;
   width: 300px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid #cba6f7;
+  background-color: #2b2b3d;
+  color: #f0f0f0;
   font-size: 1rem;
   outline: none;
   transition: border-color 0.3s ease;
 }
 
 input[type="text"]:focus {
-  border-color: #ff4500;
+  border-color: #54357a;
 }
 
+.btn-link {
+  background-color: #cba6f7;
+  color: #1e1e2f;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 1rem;
+}
+
+.btn-link:hover {
+  background-color: #b38ee4;
+}

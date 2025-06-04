@@ -10,10 +10,12 @@
     <h3>{{ p.name }}</h3>
     <p class="raza-genero">{{ p.race }} - {{ p.gender }}</p>
     <p class="ki">Base KI: <span>{{ p.ki | number:'1.0-0' }}</span></p>
-    <a [routerLink]="['/detalle', p.id]">Ver más</a>
+    <a [routerLink]="['/detalle', p.id]" class="btn-link">Ver más</a>
+    <button (click)="agregarAFavoritos(p)">⭐ Agregar a Favoritos</button>
   </div>
 </div>
 
 <div style="text-align: center; margin-top: 2rem;">
+
   <button *ngIf="quedanMas()" (click)="cargarMas()">Cargar más</button>
 </div>
