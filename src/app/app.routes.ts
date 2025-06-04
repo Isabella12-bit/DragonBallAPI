@@ -9,5 +9,8 @@ export const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'personajes', component: PersonajesComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'detalle/:id', component: DetallePersonajeComponent }
+  { path: 'detalle/:id', component: DetallePersonajeComponent },
+  { path: 'login',
+  loadComponent: () =>
+    import('./paginas/login/login.component').then(m => m.LoginComponent)}
 ];
