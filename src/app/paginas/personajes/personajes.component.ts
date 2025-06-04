@@ -44,14 +44,21 @@ export class PersonajesComponent {
   }
 
   agregarAFavoritos(personaje: PersonajeAPI): void {
-    if (this.favoritos.has(personaje.name)) return;
+  const user = this.personajeService['auth'].currentUser;
 
-    this.personajeService.agregarFavorito(personaje)
-      .then(() => {
-        console.log(`${personaje.name} agregado a favoritos`);
-        this.favoritos.add(personaje.name);
-      })
-      .catch(error => console.error('Error al agregar a favoritos:', error));
+  if (!user) {
+    alert('Debes iniciar sesión para agregar personajes a favoritos.');
+    return;
+  }
+
+  if (this.favoritos.has(personaje.name)) return;
+
+  this.personajeService.agregarFavorito(personaje)
+    .then(() => {
+      console.log(`${personaje.name} agregado a favoritos`);
+      this.favoritos.add(personaje.name);
+    })
+    .catch(error => console.error('Error al agregar a favoritos:', error));
   }
 
   esFavorito(nombre: string): boolean {
