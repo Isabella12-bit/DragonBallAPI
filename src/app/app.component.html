@@ -2,8 +2,8 @@
   <div class="navbar-left">
     <span class="brand">Dragon Ball Wiki</span>
     
-    <a routerLink="/home" routerLinkActive="active">Home</a>
-    <a routerLink="/personajes" routerLinkActive="active">Personajes</a>
+    <a [routerLink]="['/home']" [routerLinkActive]="['active']">Home</a>
+    <a [routerLink]="['/personajes']" [routerLinkActive]="['active']">Personajes</a>
   </div>
 
   <div class="navbar-right">
@@ -12,5 +12,4 @@
     <button class="sign-in-btn">👤 Sign In</button>
   </div>
 </nav>
-
 <router-outlet />
