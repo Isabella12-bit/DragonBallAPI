@@ -34,7 +34,7 @@ export class PersonajeService {
   constructor(
   private http: HttpClient,
   private firestore: Firestore,
-  private auth: Auth // 👈 inyectar Auth
+  private auth: Auth
   ) {
     this.favoritosCol = collection(this.firestore, 'favoritos');
   }
@@ -72,12 +72,12 @@ export class PersonajeService {
   // Obtener personajes favoritos desde Firestore
 
   obtenerFavoritos(): Observable<PersonajeFirestore[]> {
-    const user = this.auth.currentUser;
-    if (!user) throw new Error('Usuario no autenticado');
+  const user = this.auth.currentUser;
+  if (!user) return new Observable(obs => obs.next([])); // retorna vacío
 
-   const favoritosQuery = query(this.favoritosCol, where('uid', '==', user.uid));
-    return collectionData(favoritosQuery, { idField: 'id' }) as Observable<PersonajeFirestore[]>;
-  }
+  const favoritosQuery = query(this.favoritosCol, where('uid', '==', user.uid));
+  return collectionData(favoritosQuery, { idField: 'id' }) as Observable<PersonajeFirestore[]>;
+}
 
 
   // Eliminar personaje favorito
