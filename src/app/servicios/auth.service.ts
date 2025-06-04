@@ -1,22 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Firestore, doc, setDoc } from '@angular/fire/firestore';
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, UserCredential } from '@angular/fire/auth';
+import { Auth, authState, createUserWithEmailAndPassword, signInWithEmailAndPassword, User } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private auth: Auth, private firestore: Firestore) {}
+  user$: Observable<User | null>;  // <--- agregar aquí
+
+  constructor(private auth: Auth, private firestore: Firestore) {
+    this.user$ = authState(this.auth);  // <--- inicializar aquí
+  }
 
   async register(email: string, password: string) {
     const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
 
-    // Guardar datos básicos del usuario en Firestore
     const uid = userCredential.user.uid;
     await setDoc(doc(this.firestore, 'usuarios', uid), {
       email: userCredential.user.email,
       createdAt: new Date(),
-      // Aquí puedes agregar más campos que quieras guardar
     });
 
     return userCredential;

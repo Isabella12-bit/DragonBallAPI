@@ -1,4 +1,4 @@
-<nav class="navbar">
+<!-- <nav class="navbar">
   <div class="navbar-left">
     <span class="brand">Dragon Ball Wiki</span>
     
@@ -9,7 +9,9 @@
   <div class="navbar-right">
     <span class="icon">💬</span>
     <span class="icon">🌙</span>
-    <button class="sign-in-btn" routerLink="/login">👤 Sign In</button>
+    <button *ngIf="!usuarioLogueado" routerLink="/login">👤 Sign In</button>
+    <button *ngIf="usuarioLogueado" routerLink="/profile">👤 Profile</button>
   </div>
-</nav>
+</nav> -->
+<app-navbar></app-navbar>
 <router-outlet />

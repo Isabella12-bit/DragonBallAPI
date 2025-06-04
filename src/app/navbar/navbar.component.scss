@@ -1,0 +1,52 @@
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1c1c1c;
+  padding: 1rem 2rem;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.navbar-left,
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.brand {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #fdbb2d;
+  margin-right: 1rem;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s;
+}
+
+a:hover,
+a.active {
+  color: #fdbb2d;
+}
+
+.sign-in-btn,
+.profile-btn {
+  background-color: #fdbb2d;
+  color: #1c1c1c;
+  border: none;
+  padding: 0.5rem 1rem;
+  font-weight: 600;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sign-in-btn:hover,
+.profile-btn:hover {
+  background-color: #e1a723;
+}
