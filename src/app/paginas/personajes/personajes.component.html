@@ -1,11 +1,11 @@
 <h1>Dragon Ball Characters</h1>
 
 <div style="text-align: center; margin-bottom: 1.5rem;">
-  <input type="text" [(ngModel)]="busqueda" (input)="onBuscar()" placeholder="Buscar por nombre..." />
+  <input type="text" [(ngModel)]="busqueda" placeholder="Buscar por nombre..." />
 </div>
 
 <div class="contenedor">
-  <div class="card" *ngFor="let p of visibles">
+  <div class="card" *ngFor="let p of personajesFiltrados">
     <img [src]="p.image" [alt]="p.name" loading="lazy" width="240" height="300" />
     <h3>{{ p.name }}</h3>
     <p class="raza-genero">{{ p.race }} - {{ p.gender }}</p>
@@ -13,9 +13,4 @@
     <a [routerLink]="['/detalle', p.id]" class="btn-link">Ver más</a>
     <button (click)="agregarAFavoritos(p)">⭐ Agregar a Favoritos</button>
   </div>
-</div>
-
-<div style="text-align: center; margin-top: 2rem;">
-
-  <button *ngIf="quedanMas()" (click)="cargarMas()">Cargar más</button>
 </div>
