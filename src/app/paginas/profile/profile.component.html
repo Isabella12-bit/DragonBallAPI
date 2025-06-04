@@ -1,11 +1,18 @@
-<div class="profile-container" *ngIf="user; else noUser">
-  <h2>👤 Mi Perfil</h2>
-  <p><strong>Email:</strong> {{ user.email }}</p>
-  <p><strong>UID:</strong> {{ user.uid }}</p>
+<h2>Perfil</h2>
+<p><strong>Email:</strong> {{ user?.email }}</p>
 
-  <button (click)="logout()">Cerrar sesión</button>
+<button (click)="logout()">Cerrar sesión</button>
+
+<h3>Personajes Favoritos</h3>
+<div *ngIf="favoritos.length > 0; else sinFavoritos">
+  <div *ngFor="let p of favoritos" class="card">
+    <img [src]="p.image" alt="{{ p.name }}" width="150" />
+    <h4>{{ p.name }}</h4>
+    <p>{{ p.race }} - {{ p.gender }}</p>
+    <p>Ki: {{ p.ki }}</p>
+  </div>
 </div>
 
-<ng-template #noUser>
-  <p>No has iniciado sesión.</p>
+<ng-template #sinFavoritos>
+  <p>No tienes personajes favoritos.</p>
 </ng-template>

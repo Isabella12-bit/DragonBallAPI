@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { forkJoin, map, Observable } from 'rxjs';
+import { Auth } from '@angular/fire/auth';
+import { query, where } from '@angular/fire/firestore';
 
 import { Firestore, collection, addDoc, deleteDoc, doc, collectionData, CollectionReference, DocumentData } from '@angular/fire/firestore';
 
@@ -29,7 +31,11 @@ export class PersonajeService {
   private apiUrl = 'https://dragonball-api.com/api/characters';
   private favoritosCol: CollectionReference<DocumentData>;
 
-  constructor(private http: HttpClient, private firestore: Firestore) {
+  constructor(
+  private http: HttpClient,
+  private firestore: Firestore,
+  private auth: Auth // 👈 inyectar Auth
+  ) {
     this.favoritosCol = collection(this.firestore, 'favoritos');
   }
 
@@ -53,14 +59,26 @@ export class PersonajeService {
 
   // Agregar personaje a Firestore (favoritos)
   agregarFavorito(personaje: PersonajeAPI) {
-    const { id, ...personajeSinId } = personaje;
-    return addDoc(this.favoritosCol, personajeSinId);
+  const user = this.auth.currentUser;
+  if (!user) throw new Error('Usuario no autenticado');
+
+  const { id, ...personajeSinId } = personaje;
+  return addDoc(this.favoritosCol, {
+    ...personajeSinId,
+    uid: user.uid
+  });
   }
 
   // Obtener personajes favoritos desde Firestore
+
   obtenerFavoritos(): Observable<PersonajeFirestore[]> {
-    return collectionData(this.favoritosCol, { idField: 'id' }) as Observable<PersonajeFirestore[]>;
+    const user = this.auth.currentUser;
+    if (!user) throw new Error('Usuario no autenticado');
+
+   const favoritosQuery = query(this.favoritosCol, where('uid', '==', user.uid));
+    return collectionData(favoritosQuery, { idField: 'id' }) as Observable<PersonajeFirestore[]>;
   }
+
 
   // Eliminar personaje favorito
   eliminarFavorito(id: string) {
