@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AuthService } from '../../servicios/auth.service';
+import { Router } from '@angular/router'; // 👈 Importar Router
 
 @Component({
   selector: 'app-login',
@@ -16,13 +17,17 @@ export class LoginComponent {
   isLogin = true;
   mensaje = '';
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router // 👈 Inyectar Router
+  ) {}
 
   async onSubmit() {
     try {
       if (this.isLogin) {
         await this.authService.login(this.email, this.password);
         this.mensaje = 'Inicio de sesión exitoso ✅';
+        this.router.navigate(['/home']);
       } else {
         await this.authService.register(this.email, this.password);
         this.mensaje = 'Cuenta registrada correctamente ✅';
