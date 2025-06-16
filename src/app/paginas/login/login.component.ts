@@ -14,6 +14,7 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   email = '';
   password = '';
+  number = '';
   isLogin = true;
   mensaje = '';
 
@@ -29,7 +30,7 @@ export class LoginComponent {
         this.mensaje = 'Inicio de sesión exitoso ✅';
         this.router.navigate(['/home']);
       } else {
-        await this.authService.register(this.email, this.password);
+        await this.authService.register(this.email, this.password, this.number);
         this.mensaje = 'Cuenta registrada correctamente ✅';
       }
     } catch (err: any) {
