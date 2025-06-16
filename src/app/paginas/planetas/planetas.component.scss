@@ -102,6 +102,23 @@ button,
   }
 }
 
+button {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #cba6f7, #5b4970);
+  text-decoration: none;
+  border-radius: 30px;
+  box-shadow: 0 0 10px #322a3c;
+  transition: transform 0.3s, box-shadow 0.3s;
+  margin: 1rem;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px #cba6f7;
+}
+
 input[type="text"] {
   padding: 0.5rem 1rem;
   width: 300px;
@@ -115,5 +132,22 @@ input[type="text"] {
 
   &:focus {
     border-color: #54357a;
+  }
+}
+
+a {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: linear-gradient(45deg, #cba6f7, #5b4970);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  box-shadow: 0 0 10px #322a3c;
+  transition: transform 0.3s, box-shadow 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px #cba6f7;
   }
 }
