@@ -1,0 +1,14 @@
+<h1>Dragon Ball Planets</h1>
+
+<div style="text-align: center; margin-bottom: 1.5rem;">
+  <input type="text" [(ngModel)]="busqueda" placeholder="Buscar por nombre..." />
+</div>
+
+<div class="contenedor">
+  <div class="card" *ngFor="let planeta of planetasFiltrados">
+    <img [src]="planeta.image" [alt]="planeta.name" loading="lazy" width="240" height="240" />
+    <h3>{{ planeta.name }}</h3>
+    <p class="descripcion">{{ planeta.description }}</p>
+    <p class="estado">¿Destruido?: <strong>{{ planeta.isDestroyed ? 'Sí' : 'No' }}</strong></p>
+  </div>
+</div>

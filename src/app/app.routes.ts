@@ -4,11 +4,13 @@ import { DetallePersonajeComponent } from './paginas/detalle-personaje/detalle-p
 import { LoginComponent } from './paginas/login/login.component';
 import { HomeComponent } from './paginas/home/home.component';
 import { AgregarPersonajeComponent } from './paginas/agregar-personaje/agregar-personaje.component';
+import { PlanetasComponent } from './paginas/planetas/planetas.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'personajes', component: PersonajesComponent },
+  { path: 'planetas', component: PlanetasComponent },
   { path: 'login', component: LoginComponent },
   { path: 'detalle/:id', component: DetallePersonajeComponent },
   { path: 'login',
