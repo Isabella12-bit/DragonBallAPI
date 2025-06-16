@@ -7,10 +7,10 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  user$: Observable<User | null>;  // <--- agregar aquí
+  user$: Observable<User | null>; 
 
   constructor(private auth: Auth, private firestore: Firestore) {
-    this.user$ = authState(this.auth);  // <--- inicializar aquí
+    this.user$ = authState(this.auth); 
   }
 
   async register(email: string, password: string) {

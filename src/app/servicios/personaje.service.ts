@@ -39,7 +39,6 @@ export class PersonajeService {
     this.favoritosCol = collection(this.firestore, 'favoritos');
   }
 
-  // Obtener personajes desde API externa
   obtenerTodos(): Observable<{ items: PersonajeAPI[] }> {
   const totalPages = 16;
   const requests: Observable<{ items: PersonajeAPI[] }>[] = [];
@@ -57,7 +56,6 @@ export class PersonajeService {
   );
 }
 
-  // Agregar personaje a Firestore (favoritos)
   agregarFavorito(personaje: PersonajeAPI) {
   const user = this.auth.currentUser;
   if (!user) throw new Error('Usuario no autenticado');
@@ -69,20 +67,29 @@ export class PersonajeService {
   });
   }
 
-  // Obtener personajes favoritos desde Firestore
 
   obtenerFavoritos(): Observable<PersonajeFirestore[]> {
   const user = this.auth.currentUser;
-  if (!user) return new Observable(obs => obs.next([])); // retorna vacío
+  if (!user) return new Observable(obs => obs.next([])); 
 
   const favoritosQuery = query(this.favoritosCol, where('uid', '==', user.uid));
   return collectionData(favoritosQuery, { idField: 'id' }) as Observable<PersonajeFirestore[]>;
 }
 
-
-  // Eliminar personaje favorito
   eliminarFavorito(id: string) {
     const personajeDoc = doc(this.firestore, `favoritos/${id}`);
     return deleteDoc(personajeDoc);
+  }
+
+  agregarPersonaje(personaje: Omit<PersonajeFirestore, 'id'>) {
+  const personajesCol = collection(this.firestore, 'personajesPersonalizados');
+  return addDoc(personajesCol, personaje);
+  }
+
+  obtenerPersonajesPersonalizados(): Observable<PersonajeAPI[]> {
+  return collectionData(
+    collection(this.firestore, 'personajesPersonalizados'),
+    { idField: 'id' }
+  ) as Observable<PersonajeAPI[]>;
   }
 }
