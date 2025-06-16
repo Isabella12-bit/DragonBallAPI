@@ -19,4 +19,8 @@ export const routes: Routes = [
   { path: 'profile',
   loadComponent: () => import('./paginas/profile/profile.component').then(m => m.ProfileComponent) },
    { path: 'agregar-personaje', component: AgregarPersonajeComponent },
+   {
+  path: 'detalle-planeta/:id',
+  loadComponent: () => import('./paginas/detalle-planeta/detalle-planeta.component').then(m => m.DetallePlanetasComponent)
+  },
 ];

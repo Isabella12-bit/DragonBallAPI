@@ -1,0 +1,7 @@
+<div class="detalle-contenedor" *ngIf="planeta">
+  <h2>{{ planeta.name }}</h2>
+  <img [src]="planeta.image" alt="{{ planeta.name }}" />
+  <p><strong>Descripción:</strong> {{ planeta.description }}</p>
+  <p><strong>¿Destruido?:</strong> {{ planeta.isDestroyed ? 'Sí' : 'No' }}</p>
+  <a routerLink="/planetas" class="volver">← Volver</a>
+</div>

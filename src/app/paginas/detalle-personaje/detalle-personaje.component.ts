@@ -3,11 +3,12 @@ import { ActivatedRoute } from '@angular/router';
 import { PersonajeService } from '../../servicios/personaje.service';
 import { PersonajeAPI } from '../../servicios/personaje.service';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-detalle-personaje',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './detalle-personaje.component.html',
   styleUrl: './detalle-personaje.component.scss'
 })
@@ -23,12 +24,10 @@ export class DetallePersonajeComponent {
   constructor() {
     this.personajeId = Number(this.route.snapshot.params['id']);
 
-    // Cargar personaje desde API
     this.personajeService.obtenerTodos().subscribe(res => {
       this.personaje = res.items.find(p => p.id === this.personajeId) || undefined;
     });
 
-    // Verificar si ya es favorito
     this.personajeService.obtenerFavoritos().subscribe(favoritos => {
       const favorito = favoritos.find(f => f.name && f.name.toLowerCase() === this.personaje?.name.toLowerCase());
       this.esFavorito = !!favorito;

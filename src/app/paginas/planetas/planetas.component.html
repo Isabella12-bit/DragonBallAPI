@@ -1,4 +1,4 @@
-<h1>Dragon Ball Planets</h1>
+<h1>Planetas</h1>
 
 <div style="text-align: center; margin-bottom: 1.5rem;">
   <input type="text" [(ngModel)]="busqueda" placeholder="Buscar por nombre..." />
@@ -10,5 +10,6 @@
     <h3>{{ planeta.name }}</h3>
     <p class="descripcion">{{ planeta.description }}</p>
     <p class="estado">¿Destruido?: <strong>{{ planeta.isDestroyed ? 'Sí' : 'No' }}</strong></p>
+    <a [routerLink]="['/detalle-planeta', planeta.id]" class="btn-link">Ver más</a>
   </div>
 </div>

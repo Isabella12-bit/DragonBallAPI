@@ -1,9 +1,8 @@
-<div *ngIf="personaje">
+<div class="detalle-contenedor" *ngIf="personaje">
   <h2>{{ personaje.name }}</h2>
   <img [src]="personaje.image" alt="{{ personaje.name }}">
   <p><strong>Raza:</strong> {{ personaje.race }}</p>
   <p><strong>Género:</strong> {{ personaje.gender }}</p>
   <p><strong>Ki:</strong> {{ personaje.ki }}</p>
-  <a routerLink="/personajes">← Volver</a>
+  <a routerLink="/personajes" [routerLinkActive]="['active']">← Volver</a>
 </div>
-

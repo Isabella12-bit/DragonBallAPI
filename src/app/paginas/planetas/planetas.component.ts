@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { PlanetaAPI } from '../../servicios/planeta.service';
 import { PlanetaService } from '../../servicios/planeta.service';
 import { RouterModule } from '@angular/router';
@@ -16,7 +16,14 @@ export class PlanetasComponent implements OnInit {
   cargando = true;
   busqueda: string = '';
 
-  constructor(private planetaService: PlanetaService) {}
+  private planetaService = inject(PlanetaService);
+
+  constructor() {
+    this.planetaService.obtenerTodos().subscribe(res => {
+      console.log('Lista de planetas:', res.items);
+      this.planetas = res.items;
+    });
+  }
 
   ngOnInit(): void {
     this.planetaService.obtenerTodos().subscribe({
@@ -31,7 +38,6 @@ export class PlanetasComponent implements OnInit {
     });
   }
 
-  // 👇 2. Agrega este getter al final de la clase
   get planetasFiltrados(): PlanetaAPI[] {
     return this.planetas.filter(planeta =>
       planeta.name.toLowerCase().includes(this.busqueda.toLowerCase())
