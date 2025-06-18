@@ -65,3 +65,46 @@ p {
   transform: scale(1.05);
   box-shadow: 0 0 25px #615273;
 }
+
+.description {
+  font-size: 1.2rem;
+  color: #fdbb2d;
+  margin: 20px auto;
+  max-width: 600px;
+  animation: fadeIn 3s ease-out;
+}
+
+.stats {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #a0e7e5;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 10px 20px;
+  border-radius: 20px;
+  display: inline-block;
+  animation: fadeIn 3.5s ease-out;
+  box-shadow: 0 0 15px rgba(203, 166, 247, 0.3);
+}
+
+.gallery {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  animation: fadeIn 4s ease-out;
+}
+
+.gallery img {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 20px;
+  box-shadow: 0 0 15px #00000070;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.gallery img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px #cba6f7;
+}
