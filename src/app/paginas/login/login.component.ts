@@ -27,43 +27,67 @@ export class LoginComponent {
     private firestore: Firestore 
   ) {}
 
-  // async onSubmit() {
-  // try {
-  //   if (this.isLogin) {
-  //     const userCredential = await this.authService.login(this.email, this.password);
-  //     const uid = userCredential.user.uid;
-  //     const userData = await this.authService.getUserData(uid);
+//   async onSubmit() {
+//   try {
+//     const codigosRef = collection(this.firestore, 'codigosAdmin');
 
-  //     this.rolUsuario = userData.rol;
+//     if (this.isLogin) {
+//       // INICIAR SESIÓN
+//       const userCredential = await this.authService.login(this.email, this.password);
+//       const uid = userCredential.user.uid;
+//       const userData = await this.authService.getUserData(uid);
+//       this.rolUsuario = userData.rol;
 
-  //     this.mensaje = 'Inicio de sesión exitoso ✅';
+//       if (this.rolUsuario === 'admin') {
+//         // Verifica que el código y correo coincidan
+//         const q = query(codigosRef, where('codigo', '==', this.adminCode), where('email', '==', this.email));
+//         const querySnapshot = await getDocs(q);
 
-  //     if (this.rolUsuario === 'admin') {
-  //       this.router.navigate(['/admin-dashboard']);
-  //     } else {
-  //       this.router.navigate(['/home']);
-  //     }
-  //   } else {
-  //     await this.authService.register(this.email, this.password, this.number, this.rolUsuario); // puedes cambiar a 'admin' si es necesario
-  //     this.mensaje = 'Cuenta registrada correctamente ✅';
-  //   }
-  // } catch (err: any) {
-  //   this.mensaje = 'Error: ' + err.message;
-  // }
-  // }
-  async onSubmit() {
+//         if (querySnapshot.empty) {
+//           this.mensaje = '❌ Código de administrador inválido para este correo.';
+//           return;
+//         }
+//       }
+
+//       this.mensaje = 'Inicio de sesión exitoso ✅';
+
+//       if (this.rolUsuario === 'admin') {
+//         this.router.navigate(['/admin-dashboard']);
+//       } else {
+//         this.router.navigate(['/home']);
+//       }
+
+//     } else {
+//       // REGISTRO
+//       if (this.rolUsuario === 'admin') {
+//         const q = query(codigosRef, where('codigo', '==', this.adminCode), where('email', '==', this.email));
+//         const querySnapshot = await getDocs(q);
+
+//         if (querySnapshot.empty) {
+//           this.mensaje = '❌ Código de administrador inválido o no autorizado para este correo.';
+//           return;
+//         }
+//       }
+
+//       await this.authService.register(this.email, this.password, this.number, this.rolUsuario);
+//       this.mensaje = 'Cuenta registrada correctamente ✅';
+//     }
+//   } catch (err: any) {
+//     this.mensaje = 'Error: ' + err.message;
+//   }
+// }
+async onSubmit() {
   try {
     const codigosRef = collection(this.firestore, 'codigosAdmin');
 
     if (this.isLogin) {
-      // INICIAR SESIÓN
-      const userCredential = await this.authService.login(this.email, this.password);
-      const uid = userCredential.user.uid;
-      const userData = await this.authService.getUserData(uid);
-      this.rolUsuario = userData.rol;
-
+      // Validación del código antes de intentar login si el usuario es admin
       if (this.rolUsuario === 'admin') {
-        // Verifica que el código y correo coincidan
+        if (!this.adminCode) {
+          this.mensaje = '❌ Debes ingresar el código de administrador.';
+          return;
+        }
+
         const q = query(codigosRef, where('codigo', '==', this.adminCode), where('email', '==', this.email));
         const querySnapshot = await getDocs(q);
 
@@ -72,6 +96,12 @@ export class LoginComponent {
           return;
         }
       }
+
+      // INICIAR SESIÓN
+      const userCredential = await this.authService.login(this.email, this.password);
+      const uid = userCredential.user.uid;
+      const userData = await this.authService.getUserData(uid);
+      this.rolUsuario = userData.rol;
 
       this.mensaje = 'Inicio de sesión exitoso ✅';
 
@@ -100,4 +130,5 @@ export class LoginComponent {
     this.mensaje = 'Error: ' + err.message;
   }
 }
+
 }
