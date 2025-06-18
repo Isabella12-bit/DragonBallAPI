@@ -1,4 +1,4 @@
-<div class="login-container">
+<!-- <div class="login-container">
   <h2>{{ isLogin ? 'Iniciar Sesión' : 'Registrarse' }}</h2>
 
   <form (ngSubmit)="onSubmit()">
@@ -35,6 +35,9 @@
     <option value="admin">Administrador</option>
     </select>
 
+    <div *ngIf="rolUsuario === 'admin' && !isLogin">
+    <input [(ngModel)]="adminCode" placeholder="Código de administrador" />
+    </div>
 
     <button type="submit">
       {{ isLogin ? 'Entrar' : 'Registrarse' }}
@@ -47,4 +50,63 @@
 
   <p class="mensaje">{{ mensaje }}</p>
 
+</div> -->
+<div class="login-container">
+  <h2>{{ isLogin ? 'Iniciar Sesión' : 'Registrarse' }}</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Correo electrónico"
+      required
+    />
+
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Contraseña"
+      required
+    />
+
+    <input
+      *ngIf="!isLogin"
+      type="tel"
+      [(ngModel)]="number"
+      name="number"
+      placeholder="Número de teléfono"
+      required
+      pattern="\\d{8}"
+      title="Debe tener exactamente 8 dígitos"
+    />
+
+    <!-- Selección de rol SIEMPRE visible -->
+    <select [(ngModel)]="rolUsuario" name="rol" required>
+      <option value="" disabled selected>Selecciona un rol</option>
+      <option value="usuario">Usuario</option>
+      <option value="admin">Administrador</option>
+    </select>
+
+    <!-- Campo de código solo si se selecciona admin -->
+    <div *ngIf="rolUsuario === 'admin'">
+      <input
+        [(ngModel)]="adminCode"
+        name="adminCode"
+        placeholder="Código de administrador"
+        required
+      />
+    </div>
+
+    <button type="submit">
+      {{ isLogin ? 'Entrar' : 'Registrarse' }}
+    </button>
+  </form>
+
+  <p class="switch" (click)="isLogin = !isLogin" style="cursor:pointer; color: blue;">
+    {{ isLogin ? '¿No tienes cuenta? Regístrate' : '¿Ya tienes cuenta? Inicia sesión' }}
+  </p>
+
+  <p class="mensaje">{{ mensaje }}</p>
 </div>

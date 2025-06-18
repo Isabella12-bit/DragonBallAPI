@@ -19,7 +19,7 @@ export class PlanetaService {
   constructor(private http: HttpClient) {}
 
   obtenerTodos(): Observable<{ items: PlanetaAPI[] }> {
-    const totalPages = 3; // Puedes ajustar este valor según la cantidad real de páginas
+    const totalPages = 3;
     const requests: Observable<{ items: PlanetaAPI[] }>[] = [];
 
     for (let page = 1; page <= totalPages; page++) {
