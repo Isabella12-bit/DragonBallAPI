@@ -1,0 +1,11 @@
+<h2>Personajes pendientes</h2>
+<div *ngFor="let personaje of personajesPendientes">
+  <h3>{{ personaje.name }}</h3>
+  <p>Raza: {{ personaje.race }}</p>
+  <p>Género: {{ personaje.gender }}</p>
+  <p>Ki: {{ personaje.ki }}</p>
+  <img [src]="personaje.image" alt="{{ personaje.name }}" width="100" />
+  <button (click)="aprobarPersonaje(personaje)">Aprobar</button>
+  <button (click)="rechazarPersonaje(personaje)">Rechazar</button>
+  <hr />
+</div>

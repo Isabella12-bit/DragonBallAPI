@@ -11,7 +11,7 @@ export interface PersonajeAPI {
   name: string;
   race: string;
   gender: string;
-  ki: number;
+  ki: number | string;
   image: string;
 }
 
@@ -20,7 +20,7 @@ export interface PersonajeFirestore {
   name: string;
   race: string;
   gender: string;
-  ki: number;
+  ki: number | string;
   image: string;
 }
 
@@ -81,15 +81,21 @@ export class PersonajeService {
     return deleteDoc(personajeDoc);
   }
 
-  agregarPersonaje(personaje: Omit<PersonajeFirestore, 'id'>) {
-  const personajesCol = collection(this.firestore, 'personajesPersonalizados');
-  return addDoc(personajesCol, personaje);
-  }
-
   obtenerPersonajesPersonalizados(): Observable<PersonajeAPI[]> {
   return collectionData(
     collection(this.firestore, 'personajesPersonalizados'),
     { idField: 'id' }
   ) as Observable<PersonajeAPI[]>;
+  }
+
+  agregarPersonaje(personaje: Omit<PersonajeFirestore, 'id'>) {
+  const personajesPendientesRef = collection(this.firestore, 'personajesPendientes');
+  return addDoc(personajesPendientesRef, personaje);
+  }
+
+  obtenerPersonajesAprobados(): Observable<PersonajeFirestore[]> {
+  return collectionData(collection(this.firestore, 'personajes'), {
+    idField: 'id'
+  }) as Observable<PersonajeFirestore[]>;
   }
 }

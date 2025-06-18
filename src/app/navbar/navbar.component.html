@@ -7,20 +7,17 @@
   </div>
 
   <div class="navbar-right">
-    <!-- Admin puede agregar y aceptar personajes -->
     <a *ngIf="rolUsuario === 'admin'" routerLink="/agregar-personaje" class="btn btn-primary">
       Agregar nuevo personaje
     </a>
-    <a *ngIf="rolUsuario === 'admin'" routerLink="/aceptar-personajes" class="btn btn-warning">
+    <a *ngIf="rolUsuario === 'admin'" routerLink="/aceptar-personaje" class="btn btn-warning">
       Aceptar personajes
     </a>
 
-    <!-- Usuario normal solo puede agregar personaje -->
     <a *ngIf="rolUsuario === 'usuario'" routerLink="/agregar-personaje" class="btn btn-primary">
       Agregar nuevo personaje
     </a>
 
-    <!-- Botón de login/logout -->
     <button *ngIf="!usuarioLogueado" routerLink="/login" class="sign-in-btn">
       👤 Iniciar sesión
     </button>

@@ -23,4 +23,8 @@ export const routes: Routes = [
   path: 'detalle-planeta/:id',
   loadComponent: () => import('./paginas/detalle-planeta/detalle-planeta.component').then(m => m.DetallePlanetasComponent)
   },
+  {
+  path: 'aceptar-personaje',
+  loadComponent: () => import('./paginas/aceptar-personaje/aceptar-personaje.component').then(m => m.AceptarPersonajeComponent)
+  },
 ];
