@@ -8,17 +8,8 @@ import { Router } from '@angular/router';
   selector: 'app-agregar-personaje',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  template: `
-    <h2>Agregar nuevo personaje</h2>
-    <form (ngSubmit)="agregar()" #form="ngForm">
-      <input name="name" [(ngModel)]="nombre" placeholder="Nombre" required />
-      <input name="race" [(ngModel)]="raza" placeholder="Raza" required />
-      <input name="gender" [(ngModel)]="genero" placeholder="Género" required />
-      <input name="ki" type="number" [(ngModel)]="ki" placeholder="Ki" required />
-      <input name="image" [(ngModel)]="imagen" placeholder="URL Imagen" required />
-      <button type="submit" [disabled]="form.invalid">Agregar</button>
-    </form>
-  `
+  templateUrl: './agregar-personaje.component.html',
+  styleUrl: './agregar-personaje.component.scss'
 })
 export class AgregarPersonajeComponent {
   nombre = '';
