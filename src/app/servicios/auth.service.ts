@@ -14,15 +14,16 @@ export class AuthService {
     this.user$ = authState(this.auth); 
   }
 
-  async register(email: string, password: string, number: string) {
-    const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+  async register(email: string, password: string, number: string, rol: string = 'usuario') {
+  const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+  const uid = userCredential.user.uid;
 
-    const uid = userCredential.user.uid;
-    await setDoc(doc(this.firestore, 'usuarios', uid), {
-      email: userCredential.user.email,
-    	number: number,
-      createdAt: new Date(),
-    });
+  await setDoc(doc(this.firestore, 'usuarios', uid), {
+    email: userCredential.user.email,
+    number: number,
+    rol: rol,
+    createdAt: new Date(),
+  });
 
     return userCredential;
   }

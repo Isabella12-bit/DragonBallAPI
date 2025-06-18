@@ -1,20 +1,32 @@
 <nav class="navbar">
-   <div class="navbar-left">
+  <div class="navbar-left">
     <span class="brand">Dragon Ball Wiki</span>
-    
-    <a [routerLink]="['/home']" [routerLinkActive]="['active']">Home</a>
-    <a [routerLink]="['/personajes']" [routerLinkActive]="['active']">Personajes</a>
-    <a [routerLink]="['/planetas']" [routerLinkActive]="['active']">Planetas</a>
+    <a routerLink="/home" routerLinkActive="active">Home</a>
+    <a routerLink="/personajes" routerLinkActive="active">Personajes</a>
+    <a routerLink="/planetas" routerLinkActive="active">Planetas</a>
   </div>
 
   <div class="navbar-right">
-    <a routerLink="/agregar-personaje" class="btn btn-primary">Agregar nuevo personaje</a>
+    <!-- Admin puede agregar y aceptar personajes -->
+    <a *ngIf="rolUsuario === 'admin'" routerLink="/agregar-personaje" class="btn btn-primary">
+      Agregar nuevo personaje
+    </a>
+    <a *ngIf="rolUsuario === 'admin'" routerLink="/aceptar-personajes" class="btn btn-warning">
+      Aceptar personajes
+    </a>
+
+    <!-- Usuario normal solo puede agregar personaje -->
+    <a *ngIf="rolUsuario === 'usuario'" routerLink="/agregar-personaje" class="btn btn-primary">
+      Agregar nuevo personaje
+    </a>
+
+    <!-- Botón de login/logout -->
     <button *ngIf="!usuarioLogueado" routerLink="/login" class="sign-in-btn">
-      👤 Sign In
+      👤 Iniciar sesión
     </button>
 
     <button *ngIf="usuarioLogueado" routerLink="/profile" class="profile-btn">
-      👤 Profile
+      👤 Perfil
     </button>
   </div>
 </nav>

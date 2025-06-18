@@ -17,6 +17,7 @@ export class LoginComponent {
   number = '';
   isLogin = true;
   mensaje = '';
+  rolUsuario = '';
 
   constructor(
     private authService: AuthService,
@@ -24,17 +25,27 @@ export class LoginComponent {
   ) {}
 
   async onSubmit() {
-    try {
-      if (this.isLogin) {
-        await this.authService.login(this.email, this.password);
-        this.mensaje = 'Inicio de sesión exitoso ✅';
-        this.router.navigate(['/home']);
+  try {
+    if (this.isLogin) {
+      const userCredential = await this.authService.login(this.email, this.password);
+      const uid = userCredential.user.uid;
+      const userData = await this.authService.getUserData(uid);
+
+      this.rolUsuario = userData.rol;
+
+      this.mensaje = 'Inicio de sesión exitoso ✅';
+
+      if (this.rolUsuario === 'admin') {
+        this.router.navigate(['/admin-dashboard']);
       } else {
-        await this.authService.register(this.email, this.password, this.number);
-        this.mensaje = 'Cuenta registrada correctamente ✅';
+        this.router.navigate(['/home']);
       }
-    } catch (err: any) {
-      this.mensaje = 'Error: ' + err.message;
+    } else {
+      await this.authService.register(this.email, this.password, this.number, this.rolUsuario); // puedes cambiar a 'admin' si es necesario
+      this.mensaje = 'Cuenta registrada correctamente ✅';
     }
+  } catch (err: any) {
+    this.mensaje = 'Error: ' + err.message;
+  }
   }
 }

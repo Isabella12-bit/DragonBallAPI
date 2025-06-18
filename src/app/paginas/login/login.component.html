@@ -29,6 +29,13 @@
       title="Debe tener exactamente 8 dígitos"
     />
 
+    <select *ngIf="!isLogin" [(ngModel)]="rolUsuario" name="rol" required>
+    <option value="" disabled selected>Selecciona un rol</option>
+    <option value="usuario">Usuario</option>
+    <option value="admin">Administrador</option>
+    </select>
+
+
     <button type="submit">
       {{ isLogin ? 'Entrar' : 'Registrarse' }}
     </button>
@@ -39,4 +46,5 @@
   </p>
 
   <p class="mensaje">{{ mensaje }}</p>
+
 </div>
