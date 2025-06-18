@@ -1,0 +1,9 @@
+/* styles.scss o global.scss */
+
+body {
+  background: linear-gradient(to bottom right, #fceabb, #e6e9f0); // Degradado suave
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-attachment: fixed; // Para que el fondo no se desplace al hacer scroll
+}
